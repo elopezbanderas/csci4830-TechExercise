@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datamodel.Transcript;
+import datamodel.Course;
 import util.Info;
 import util.UtilDBLopezBanderas;
 
@@ -21,7 +21,7 @@ public class SimpleSearchHB extends HttpServlet implements Info {
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String keyword = request.getParameter("keyword").trim();
+ /*     String keyword = request.getParameter("keyword").trim();
 
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
@@ -34,7 +34,7 @@ public class SimpleSearchHB extends HttpServlet implements Info {
             "<h1 align=\"center\">" + title + "</h1>\n");
       out.println("<ul>");
 
-      List<Transcript> listEmployees = null;
+      List<Course> listEmployees = null;
       if (keyword != null && !keyword.isEmpty()) {
          listEmployees = UtilDBLopezBanderas.listEmployees(keyword);
       } else {
@@ -46,8 +46,8 @@ public class SimpleSearchHB extends HttpServlet implements Info {
       out.println("</body></html>");
    }
 
-   void display(List<Transcript> listEmployees, PrintWriter out) {
-      for (Transcript employee : listEmployees) {
+   void display(List<Course> listEmployees, PrintWriter out) {
+      for (Course employee : listEmployees) {
          System.out.println("[DBG] " + employee.getId() + ", " //
                + employee.getName() + ", " //
                + employee.getAge() + ", " 
@@ -57,7 +57,7 @@ public class SimpleSearchHB extends HttpServlet implements Info {
                + employee.getName() + ", " //
                + employee.getAge() + ", " 
                + employee.getPhone() + "</li>");
-      }
+      }*/
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

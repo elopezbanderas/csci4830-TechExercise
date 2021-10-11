@@ -12,7 +12,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-import datamodel.Transcript;
+import datamodel.Course;
+import datamodel.Student;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -35,18 +36,18 @@ public class UtilDBLopezBanderas {
       return sessionFactory;
    }
 
-   public static List<Transcript> listEmployees() {
-      List<Transcript> resultList = new ArrayList<Transcript>();
+   public static List<Course> listCourses() {
+      List<Course> resultList = new ArrayList<Course>();
 
       Session session = getSessionFactory().openSession();
       Transaction tx = null;  // each process needs transaction and commit the changes in DB.
 
       try {
          tx = session.beginTransaction();
-         List<?> employees = session.createQuery("FROM Transcript").list();
-         for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
-            Transcript employee = (Transcript) iterator.next();
-            resultList.add(employee);
+         List<?> courses = session.createQuery("FROM Course").list();
+         for (Iterator<?> iterator = courses.iterator(); iterator.hasNext();) {
+            Course course = (Course) iterator.next();
+            resultList.add(course);
          }
          tx.commit();
       } catch (HibernateException e) {
@@ -59,21 +60,21 @@ public class UtilDBLopezBanderas {
       return resultList;
    }
 
-   public static List<Transcript> listEmployees(String keyword) {
-      List<Transcript> resultList = new ArrayList<Transcript>();
+   public static List<Course> listCourses(int keyword) {
+      List<Course> resultList = new ArrayList<Course>();
 
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
 
       try {
          tx = session.beginTransaction();
-         System.out.println((Transcript)session.get(Transcript.class, 1)); // use "get" to fetch data
+         System.out.println((Course)session.get(Course.class, 1)); // use "get" to fetch data
         // Query q = session.createQuery("FROM Employee");
-         List<?> employees = session.createQuery("FROM Transcript").list();
-         for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
-            Transcript employee = (Transcript) iterator.next();
-            if (employee.getName().startsWith(keyword)) {
-               resultList.add(employee);
+         List<?> courses = session.createQuery("FROM Course").list();
+         for (Iterator<?> iterator = courses.iterator(); iterator.hasNext();) {
+            Course course = (Course) iterator.next();
+            if (course.getId()==(keyword)) {
+               resultList.add(course);
             }
          }
          tx.commit();
@@ -87,12 +88,12 @@ public class UtilDBLopezBanderas {
       return resultList;
    }
 
-   public static void createEmployees(String userName, String age, String phone) {
+   public static void addCourse(String id, String course_id, String section, String semester, String title, String credit_hours, String grade) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
-         session.save(new Transcript(userName, Integer.valueOf(age), phone));
+         session.save(new Course(Integer.valueOf(id), course_id, section, semester, title, Integer.valueOf(credit_hours), grade));
          tx.commit();
       } catch (HibernateException e) {
          if (tx != null)
@@ -102,4 +103,20 @@ public class UtilDBLopezBanderas {
          session.close();
       }
    }
+   
+   public static void addStudent(String id, String first_name, String last_name) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      try {
+	         tx = session.beginTransaction();
+	         session.save(new Student(Integer.valueOf(id), first_name, last_name));
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	   }
 }

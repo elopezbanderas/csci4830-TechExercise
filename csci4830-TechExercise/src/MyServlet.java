@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datamodel.Transcript;
+import datamodel.Course;
 import util.UtilDBLopezBanderas;
 
 @WebServlet("/MyServlet")
@@ -23,11 +23,11 @@ public class MyServlet extends HttpServlet {
       //response.setContentType("text/html");
       
       response.getWriter().append("Hello World!");
-/*
+
       // #1
-      UtilDBLopezBanderas.createEmployees("user3", "33", "402-111-1111");
-      UtilDBLopezBanderas.createEmployees("user4", "44", "402-222-2222");
-      
+      UtilDBLopezBanderas.addStudent("84103554", "eloy", "lopez banderas");
+      UtilDBLopezBanderas.addCourse("84103554", "CSCI4830", "850", "FALL2021", "Intro to SoftWare Eng", "3", "A+" );
+/*      
       // #2
       retrieveDisplayData(response.getWriter()); 
 */
@@ -43,8 +43,8 @@ public class MyServlet extends HttpServlet {
             "<body bgcolor=\"#f0f0f0\">\n" + //
             "<h1 align=\"center\">" + title + "</h1>\n");
       out.println("<ul>");
-      List<Transcript> listEmployees = UtilDBLopezBanderas.listEmployees();
-      for (Transcript employee : listEmployees) {
+      List<Course> listEmployees = UtilDBLopezBanderas.listEmployees();
+      for (Course employee : listEmployees) {
          System.out.println("[DBG] " + employee.getId() + ", " //
                + employee.getName() + ", " //
                + employee.getAge() + ", " 
