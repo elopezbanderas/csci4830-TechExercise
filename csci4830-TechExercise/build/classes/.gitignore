@@ -1,7 +1,6 @@
+/CreateAccount.class
+/LogInStudent.class
 /MyServlet.class
-/SimpleInsertHB.class
-/SimpleSearchHB.class
 /datamodel/
 /hibernate.cfg.xml
 /util/
-/CreateAccount.class

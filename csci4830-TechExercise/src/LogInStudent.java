@@ -12,11 +12,11 @@ import datamodel.Course;
 import util.Info;
 import util.UtilDBLopezBanderas;
 
-@WebServlet("/SimpleSearchHB")
-public class SimpleSearchHB extends HttpServlet implements Info {
+@WebServlet("/LogInStudent")
+public class LogInStudent extends HttpServlet implements Info {
    private static final long serialVersionUID = 1L;
 
-   public SimpleSearchHB() {
+   public LogInStudent() {
       super();
    }
 
