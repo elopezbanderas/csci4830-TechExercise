@@ -43,7 +43,7 @@ public class CreateAccount extends HttpServlet implements Info {
 		out.println("<nav>\n<a href=/" + projectName + "/" + login + ">Log In</a> <br>");
 		out.println("<a href=/" + projectName + "/" + main + ">Home Page</a> <br></nav>");
 
-		out.println("<section>\\n<h1>Student Account Info:</h1>");
+		out.println("<section>\n<h1>Student Account Info:</h1>");
 
 		out.println("<ul>");
 		out.println("<li> NUID: " + nuid);

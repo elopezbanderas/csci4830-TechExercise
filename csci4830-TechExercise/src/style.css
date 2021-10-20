@@ -1,0 +1,50 @@
+body {
+    background-color: #EEE;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+table, th, td{
+	border: 1px solid black;
+	float: right;
+}
+
+#container {
+    background-color: white;
+}
+
+#header{
+    background-color: #66CCFF;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+#content {
+    padding: 10px;
+}
+
+#nav {
+    width: 180px;
+    height: 300px;
+    float: left;
+}
+
+#nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#main {
+    text-align: left;
+}
+
+#footer {
+    clear: both;
+    padding: 10px;
+    background-color: #999999;
+    color: white;
+    text-align: right;
+}

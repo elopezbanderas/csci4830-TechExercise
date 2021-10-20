@@ -35,6 +35,32 @@ public class UtilDBLopezBanderas {
       sessionFactory = configuration.buildSessionFactory(builder.build());
       return sessionFactory;
    }
+   
+   public static List<Student> getAccount(String keyword) {
+	   	  List<Student> resultList = new ArrayList<Student>();
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null; 
+	      int nuid = Integer.valueOf(keyword);
+
+	      try {
+	         tx = session.beginTransaction();
+	         
+	         List<?> accounts = session.createQuery("FROM Student WHERE id="+Integer.toString(nuid)).list();
+	         for (Iterator<?> iterator = accounts.iterator(); iterator.hasNext();) {
+	             Student student = (Student) iterator.next();
+	             resultList.add(student);
+	          }
+	         
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
 
    public static List<Course> listCourses() {
       List<Course> resultList = new ArrayList<Course>();
@@ -60,22 +86,22 @@ public class UtilDBLopezBanderas {
       return resultList;
    }
 
-   public static List<Course> listCourses(int keyword) {
+   public static List<Course> listCourses(String keyword) {
       List<Course> resultList = new ArrayList<Course>();
+      int nuid = Integer.valueOf(keyword);
 
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
 
       try {
          tx = session.beginTransaction();
-         System.out.println((Course)session.get(Course.class, 1)); // use "get" to fetch data
+        // System.out.println((Course)session.get(Course.class, 1)); // use "get" to fetch data
         // Query q = session.createQuery("FROM Employee");
-         List<?> courses = session.createQuery("FROM Course").list();
+         List<?> courses = session.createQuery("FROM Course WHERE id="+Integer.toString(nuid)).list();
          for (Iterator<?> iterator = courses.iterator(); iterator.hasNext();) {
             Course course = (Course) iterator.next();
-            if (course.getId()==(keyword)) {
-               resultList.add(course);
-            }
+            resultList.add(course);
+            
          }
          tx.commit();
       } catch (HibernateException e) {
