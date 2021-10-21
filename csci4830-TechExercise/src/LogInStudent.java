@@ -39,12 +39,12 @@ public class LogInStudent extends HttpServlet implements Info {
       
       if(ListAccount.size()==0) {
     	  out.println("<body><div id=\"container\">");
-    	  out.println("<div id=\"header\"><h1>Account Does Not Exist!</h1></div>");
+    	  out.println("<div id=\"header\"><h1>Student Academic Tracker</h1></div>");
     	  out.println("<div id=\"content\">");
     	  out.println("<div id=\"nav\"><h3>Navigation</h3><ul>");
     	  out.println("<li><a href=\"/csci4830-TechExercise/main.html\">Home Page</a> <br></li>");
     	  out.println("<li><a href=\"/csci4830-TechExercise/createAccount.html\">Create New Account</a> <br></li></ul></div>");
-    	  out.println("<div id=\"main\"><p>The NUID you submitted does not correspond to any existing student account.</p>");
+    	  out.println("<div id=\"main\"><h2>Account Does Not Exist!</h2><p>The NUID you submitted does not correspond to any existing student account.</p>");
     	  out.println("<p>Try logging in again with a different NUID, or create a new student account.</p></div></div>");
     	  out.println("</div><div id=\"footer\">Copyright</div></div></body></html>");
 
@@ -75,10 +75,57 @@ public class LogInStudent extends HttpServlet implements Info {
    } 
 
    void display(List<Course> listCourses, PrintWriter out) {
+	  double gpa = 0;
+	  double totalCredits = 0;
+	  double totalPoints = 0;
+	  int failCount = 0;
 	  out.println("<div id=\"main\"><h2>Courses Taken:</h2><ul>");
  	  
 	  out.println("<table><tr><th>Course</th><th>Semester</th><th>Credits</th><th>Final Grade</th></tr>");
       for (Course course : listCourses) {
+    	 double points = 0;;
+    	 
+    	 switch(course.getGrade()) {
+    	 	case "A+":
+    	 		points = 4.0;
+    	 		break;
+    	 	case "A":
+    	 		points = 4.0;
+    	 		break;
+    	 	case "A-":
+    	 		points = 3.67;
+    	 		break;
+    	 	case "B+":
+    	 		points = 3.33;
+    	 		break;
+    	 	case "B":
+    	 		points = 3.0;
+    	 		break;
+    	 	case "C+":
+    	 		points = 2.33;
+    	 		break;
+    	 	case "C":
+    	 		points = 2.0;
+    	 		break;
+    	 	case "C-":
+    	 		points = 1.67;
+    	 		break;
+    	 	case "D+":
+    	 		points = 1.33;
+    	 		break;
+    	 	case "D":
+    	 		points = 1.0;
+    	 		break;
+    	 	case "D-":
+    	 		points = 0.67;
+    	 		break;
+    	 	case "F":
+    	 		points = 0;
+    	 		failCount++;
+    		 
+    	 }
+    	 totalCredits += course.getCredit_hours();
+    	 totalPoints += points * course.getCredit_hours();
     	 
     	 out.println("<tr><td>" + course.getCourse_id()+"-"+course.getSection()+" : "+course.getTitle() + "</td>" + 
     			 	 "<td>" + course.getSemester() + "</td>" +
@@ -86,9 +133,15 @@ public class LogInStudent extends HttpServlet implements Info {
     			 	 "<td>" + course.getGrade() + "</td></tr>");
         		
       }
+      gpa = totalPoints/totalCredits;
       out.println("</table>");
       
-      
+      out.println("<h2>Summary:</h2><ul>");
+      out.println("<table><tr><th>GPA</th><th>Classes Passed:</th><th>Total Classes:</th></tr>");
+      out.println("<tr><td>" + gpa + "</td>" + 
+    		  	"<td>" + (listCourses.size()-failCount) + "</td>" + 
+    		  	"<td>" + listCourses.size()+ "</td></tr>");
+      out.println("</table>");
       
       out.println("</div></div>");
       out.println("</div><div id=\"footer\">Copyright</div></div></body></html>");
