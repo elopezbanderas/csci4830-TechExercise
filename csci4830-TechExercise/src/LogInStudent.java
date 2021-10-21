@@ -27,10 +27,8 @@ public class LogInStudent extends HttpServlet implements Info {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       
-      //out.println("Done! :)");
-      
-      //String docType = "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">\n"; //
-      out.println(//docType + //
+      String docType = "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">\n"; //
+      out.println(docType + //
 
 				"<html><head><title>Account Page</title>"+
 				"<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" /></head>\n");

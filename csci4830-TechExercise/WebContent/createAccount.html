@@ -1,61 +1,36 @@
 <html>
-<head>
-<style>
-header {
-    background-color:black;
-    color:white;
-    text-align:center;
-    padding:5px;	 
-}
-nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;	      
-}
-section {
-    width:350px;
-    float:left;
-    padding:10px;	 	 
-}
-footer {
-    background-color:black;
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px;	 	 
-}
-</style>
-</head>
-
-<body>
-<header>
-<h1> Create New Transcript</h1>
-</header>
-
-<nav>
-<a href="/csci4830-TechExercise/logIn.html">Log In</a> <br>
-<a href="/csci4830-TechExercise/main.html">Home Page</a> <br>
-</nav>
-
-<section>
-	<h1>Enter Student Information:</h1>
+	<head>
+		<title>Create New Account Page</title>
+		<link rel="stylesheet" type="text/css" href="style.css" /> 
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1>Student Academic Tracker</h1>
+			</div>
+			<div id="content">
+				<div id="nav">
+					<h3>Navigation</h3>
+					<ul>
+						<li><a href="/csci4830-TechExercise/main.html">Home Page</a> <br></li>
+						<li><a href="/csci4830-TechExercise/logIn.html">Log In</a> <br> <br></li>
+					</ul>
+				</div>
+				<div id="main">
+					<h2>Create New Account</h2>
+					<form action="CreateAccount" method="POST">
 	
-	<form action="CreateAccount" method="POST">
-	
-		NUID: <input type="text" name="nuid"> <br />
-		First Name: <input type="text" name="firstName"> <br />
-		Last Name: <input type="text" name="lastName"> <br />
+						NUID: <input type="text" name="nuid"> <br />
+						First Name: <input type="text" name="firstName"> <br />
+						Last Name: <input type="text" name="lastName"> <br />
 		
-		<input type="submit" value="Submit" />
-	</form>
-
-</section>
-
-<footer>
-Copyright
-</footer>
-</body>
+						<input type="submit" value="Submit" />
+					</form>
+				</div>
+			</div>
+			<div id="footer">
+				Copyright
+			</div>
+		</div>
+	</body>
 </html>

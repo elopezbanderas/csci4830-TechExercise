@@ -130,19 +130,22 @@ public class UtilDBLopezBanderas {
       }
    }
    
-   public static void addStudent(String id, String first_name, String last_name) {
+   public static boolean addStudent(String id, String first_name, String last_name) {
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
+	      boolean result = true;
 	      try {
 	         tx = session.beginTransaction();
 	         session.save(new Student(Integer.valueOf(id), first_name, last_name));
 	         tx.commit();
 	      } catch (HibernateException e) {
+	    	 result = false;
 	         if (tx != null)
 	            tx.rollback();
 	         e.printStackTrace();
 	      } finally {
 	         session.close();
 	      }
+	      return result;
 	   }
 }
