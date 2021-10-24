@@ -32,12 +32,10 @@ public class AddCourse extends HttpServlet {
 		String credit_hours = request.getParameter("credit_hours").trim();
 		String grade = request.getParameter("grade").trim().toUpperCase();
 		
-		//request.setAttribute("nuid", nuid);
+		int addCourse = 0; //0 for success, other for failure for failure
 		
-		int result = 0; //0 for success, other for failure for failure
-		
-		if(course_id == null || section == null || semester == null || title == null || credit_hours == null || grade == null ) {
-			result = 1;
+		if(course_id.isEmpty() || section.isEmpty() || semester.isEmpty() || title.isEmpty() || credit_hours.isEmpty() || grade.isEmpty() ) {
+			addCourse = 1;
 
 		}
 		
@@ -45,18 +43,16 @@ public class AddCourse extends HttpServlet {
 				&& !grade.contentEquals("B") && !grade.contentEquals("B-") && !grade.contentEquals("C+") && !grade.contentEquals("C")
 				&& !grade.contentEquals("C-") && !grade.contentEquals("D+") && !grade.contentEquals("D") && !grade.contentEquals("D-")
 				&& !grade.contentEquals("F")) {
-	    	result = 1;
+	    	addCourse = 1;
 
 
 		}
 		else if(!UtilDBLopezBanderas.addCourse(nuid, course_id, section, semester, title, credit_hours, grade)) {
-			result = 1;
+			addCourse = 1;
 	    	
 		}
 
-		response.sendRedirect("LogInStudent?nuid="+nuid+"&result="+result);
-	    //request.getSession().setAttribute("result", result);
-	    //request.getRequestDispatcher("LogInStudent").forward(request, response);
+		response.sendRedirect("LogInStudent?nuid="+nuid+"&addCourse="+addCourse);
 
 	}
 

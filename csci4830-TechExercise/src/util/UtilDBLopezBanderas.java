@@ -9,6 +9,7 @@ import java.util.Iterator;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
@@ -132,6 +133,39 @@ public class UtilDBLopezBanderas {
       }
       return result;
    }
+   
+   public static boolean deleteCourse(String id, String course_id, String section, String semester) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      boolean result = true;
+	      try {
+	         tx = session.beginTransaction();
+	         
+	         Course course = (Course) session.createCriteria(Course.class).add(Restrictions.eq("id", Integer.valueOf(id)))
+	        		 .add(Restrictions.eq("course_id", course_id))
+	        		 .add(Restrictions.eq("section", section)).uniqueResult();
+	         
+	         session.delete(course);
+	         
+	        // session.createQuery("FROM Course WHERE id="+id+"and course_id="+course_id+"and section="+section
+	        //		 +"and semester="+semester).executeUpdate();
+	         tx.commit();
+	      } catch (HibernateException e) {
+	    	 result = false;
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } catch(java.lang.IllegalArgumentException e) {
+	    	  result = false;
+		      if (tx != null)
+		         tx.rollback();
+		      e.printStackTrace();
+	      }
+	      finally {
+	         session.close();
+	      }
+	      return result;
+	   }
    
    public static boolean addStudent(String id, String first_name, String last_name) {
 	      Session session = getSessionFactory().openSession();

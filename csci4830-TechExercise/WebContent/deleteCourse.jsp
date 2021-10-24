@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Add Course Page</title>
+<title>Delete Course Page</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 
 </head>
@@ -22,18 +22,15 @@
 				</ul>
 			</div>
 			<div id="main">
-				<h2>Add Course:</h2>
-				<form action="AddCourse" method="POST">
+				<h2>Delete Course:</h2>
+				<form action="DeleteCourse" method="POST">
 	
 					Course Name: <input type="text" name="course_id"> <em>ex: CSCI4830</em><br /> 
 					Course Section: <input type="text" name="section"> <em>ex: 820</em><br />
-					Course title: <input type="text" name="title"> <em>ex: Intro to Software Engineering</em><br />
 					Semester: <input type="text" name="semester"> <em>ex: FALL2021, SPR2021, or SUM2021</em><br />
-					Credit Hours: <input type="text" name="credit_hours"> <em>ex: 3</em><br />
-					Final Grade: <input type="text" name="grade"> <em>ex: B+</em><br />
 					<input type="hidden" name="nuid" value="<%=request.getParameter("nuid") %>"/>
 		
-					<input type="submit" value="Add Course" />
+					<input type="submit" value="Delete Course" />
 				</form>
 				
 			</div>

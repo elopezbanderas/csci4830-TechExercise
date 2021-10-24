@@ -23,7 +23,15 @@ public class LogInStudent extends HttpServlet implements Info {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String nuid = request.getParameter("nuid").trim();
-
+      int addCourse = -1;
+      int deleteCourse = -1;
+      
+      if(request.getParameterMap().containsKey("addCourse"))
+    	  addCourse = Integer.valueOf(request.getParameter("addCourse"));
+      
+      if(request.getParameterMap().containsKey("deleteCourse"))
+    	  deleteCourse = Integer.valueOf(request.getParameter("deleteCourse"));
+      
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       
@@ -48,7 +56,7 @@ public class LogInStudent extends HttpServlet implements Info {
 
   		  return;
       }
-    
+      
       Student student = ListAccount.get(0);
       
       out.println("<body><div id=\"container\">");
@@ -56,7 +64,8 @@ public class LogInStudent extends HttpServlet implements Info {
 	  out.println("<div id=\"content\">");
 	  out.println("<div id=\"nav\"><h3>Navigation</h3><ul>");
 	  out.println("<li><a href=\"/csci4830-TechExercise/main.html\">Home Page</a> <br></li>");
-	  out.println("<li><a href=\"/csci4830-TechExercise/addCourse.jsp?nuid="+ nuid +"\">Add Course</a> <br></li></ul></div>");
+	  out.println("<li><a href=\"/csci4830-TechExercise/addCourse.jsp?nuid="+ nuid +"\">Add Course</a> <br></li>");
+	  out.println("<li><a href=\"/csci4830-TechExercise/deleteCourse.jsp?nuid="+ nuid +"\">Delete Course</a> <br></li>"+"</ul></div>");
       
       List<Course> listCourses = UtilDBLopezBanderas.listCourses(nuid);
       
@@ -69,10 +78,10 @@ public class LogInStudent extends HttpServlet implements Info {
       }
       
       
-      display(listCourses, out);
+      display(listCourses, out, addCourse, deleteCourse);
    } 
 
-   void display(List<Course> listCourses, PrintWriter out) {
+   void display(List<Course> listCourses, PrintWriter out, int addCourse, int deleteCourse) {
 	  double gpa = 0;
 	  double totalCredits = 0;
 	  double totalPoints = 0;
@@ -133,7 +142,7 @@ public class LogInStudent extends HttpServlet implements Info {
       }
       gpa = totalPoints/totalCredits;
       out.println("</table>");
-      
+     
       out.println("<h2>Summary:</h2><ul>");
       out.println("<table><tr><th>GPA</th><th>Classes Passed:</th><th>Total Classes:</th></tr>");
       out.println("<tr><td>" + gpa + "</td>" + 
@@ -141,8 +150,34 @@ public class LogInStudent extends HttpServlet implements Info {
     		  	"<td>" + listCourses.size()+ "</td></tr>");
       out.println("</table>");
       
-      out.println("</div></div>");
-      out.println("</div><div id=\"footer\">Copyright</div></div></body></html>");
+      out.println("</div></div></div>");
+      
+      if(addCourse == 0) { //success adding course
+    	  out.println("<div class=\"alert0\">\n" + 
+      	  		"  <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n" + 
+      	  		"  <strong>Success!</strong> Course was successfully added.\n" + 
+      	  		"</div>");
+      }
+      if(addCourse == 1) { //failure adding course
+    	  out.println("<div class=\"alert1\">\n" + 
+    	  		"  <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n" + 
+    	  		"  <strong>Warning!</strong> Course was not added.\n" + 
+    	  		"</div>");
+      }
+      if(deleteCourse == 0) { //success deleting course
+    	  out.println("<div class=\"alert0\">\n" + 
+      	  		"  <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n" + 
+      	  		"  <strong>Success!</strong> Course was successfully deleted.\n" + 
+      	  		"</div>");
+      }
+      if(deleteCourse == 1) { //failure deleting course
+    	  out.println("<div class=\"alert1\">\n" + 
+    	  		"  <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n" + 
+    	  		"  <strong>Warning!</strong> Course was not deleted.\n" + 
+    	  		"</div>");
+      }
+      
+      out.println("<div id=\"footer\">Copyright</div></div></body></html>");
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
