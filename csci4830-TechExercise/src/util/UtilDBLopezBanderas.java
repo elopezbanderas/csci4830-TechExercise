@@ -114,20 +114,23 @@ public class UtilDBLopezBanderas {
       return resultList;
    }
 
-   public static void addCourse(String id, String course_id, String section, String semester, String title, String credit_hours, String grade) {
+   public static boolean addCourse(String id, String course_id, String section, String semester, String title, String credit_hours, String grade) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
+      boolean result = true;
       try {
          tx = session.beginTransaction();
          session.save(new Course(Integer.valueOf(id), course_id, section, semester, title, Integer.valueOf(credit_hours), grade));
          tx.commit();
       } catch (HibernateException e) {
+    	 result = false;
          if (tx != null)
             tx.rollback();
          e.printStackTrace();
       } finally {
          session.close();
       }
+      return result;
    }
    
    public static boolean addStudent(String id, String first_name, String last_name) {

@@ -22,7 +22,7 @@ public class LogInStudent extends HttpServlet implements Info {
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String keyword = request.getParameter("nuid").trim();
+      String nuid = request.getParameter("nuid").trim();
 
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
@@ -33,7 +33,7 @@ public class LogInStudent extends HttpServlet implements Info {
 				"<html><head><title>Account Page</title>"+
 				"<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" /></head>\n");
       
-      List<Student> ListAccount = UtilDBLopezBanderas.getAccount(keyword);
+      List<Student> ListAccount = UtilDBLopezBanderas.getAccount(nuid);
       
       if(ListAccount.size()==0) {
     	  out.println("<body><div id=\"container\">");
@@ -56,9 +56,9 @@ public class LogInStudent extends HttpServlet implements Info {
 	  out.println("<div id=\"content\">");
 	  out.println("<div id=\"nav\"><h3>Navigation</h3><ul>");
 	  out.println("<li><a href=\"/csci4830-TechExercise/main.html\">Home Page</a> <br></li>");
-	  out.println("<li><a href=\"/csci4830-TechExercise/createAccount.html\">Create New Account</a> <br></li></ul></div>");
+	  out.println("<li><a href=\"/csci4830-TechExercise/addCourse.jsp?nuid="+ nuid +"\">Add Course</a> <br></li></ul></div>");
       
-      List<Course> listCourses = UtilDBLopezBanderas.listCourses(keyword);
+      List<Course> listCourses = UtilDBLopezBanderas.listCourses(nuid);
       
       if(listCourses.size()==0) {  
     	  out.println("<div id=\"main\"><h2>Courses Taken:</h2><ul><p>You have not registered any courses!</p>");
@@ -120,7 +120,7 @@ public class LogInStudent extends HttpServlet implements Info {
     	 	case "F":
     	 		points = 0;
     	 		failCount++;
-    		 
+    		
     	 }
     	 totalCredits += course.getCredit_hours();
     	 totalPoints += points * course.getCredit_hours();

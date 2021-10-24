@@ -2,12 +2,13 @@ body {
     background-color: #EEE;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     margin: 0;
 }
 
 table, th, td{
 	border: 1px solid black;
+	
 }
 
 #container {

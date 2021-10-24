@@ -1,7 +1,8 @@
-/CreateAccount.class
-/LogInStudent.class
-/MyServlet.class
 /datamodel/
 /hibernate.cfg.xml
 /style.css
 /util/
+/AddCourse.class
+/CreateAccount.class
+/LogInStudent.class
+/MyServlet.class
