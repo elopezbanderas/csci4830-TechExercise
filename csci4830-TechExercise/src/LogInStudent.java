@@ -49,7 +49,8 @@ public class LogInStudent extends HttpServlet implements Info {
     	  out.println("<div id=\"content\">");
     	  out.println("<div id=\"nav\"><h3>Navigation</h3><ul>");
     	  out.println("<li><a href=\"/csci4830-TechExercise/main.html\">Home Page</a> <br></li>");
-    	  out.println("<li><a href=\"/csci4830-TechExercise/createAccount.html\">Create New Account</a> <br></li></ul></div>");
+    	  out.println("<li><a href=\"/csci4830-TechExercise/logIn.html\">Log In</a> <br></li>");
+    	  out.println("<li><a href=\"/csci4830-TechExercise/createAccount.html\">Create Account</a> <br></li></ul></div>");
     	  out.println("<div id=\"main\"><h2>Account Does Not Exist!</h2><p>The NUID you submitted does not correspond to any existing student account.</p>");
     	  out.println("<p>Try logging in again with a different NUID, or create a new student account.</p></div></div>");
     	  out.println("</div><div id=\"footer\">Copyright</div></div></body></html>");
@@ -65,6 +66,7 @@ public class LogInStudent extends HttpServlet implements Info {
 	  out.println("<div id=\"nav\"><h3>Navigation</h3><ul>");
 	  out.println("<li><a href=\"/csci4830-TechExercise/main.html\">Home Page</a> <br></li>");
 	  out.println("<li><a href=\"/csci4830-TechExercise/addCourse.jsp?nuid="+ nuid +"\">Add Course</a> <br></li>");
+	  out.println("<li><a href=\"/csci4830-TechExercise/searchCourse.jsp?nuid="+ nuid +"\">Search Course</a> <br></li>");
 	  out.println("<li><a href=\"/csci4830-TechExercise/deleteCourse.jsp?nuid="+ nuid +"\">Delete Course</a> <br></li>"+"</ul></div>");
       
       List<Course> listCourses = UtilDBLopezBanderas.listCourses(nuid);
@@ -82,7 +84,6 @@ public class LogInStudent extends HttpServlet implements Info {
    } 
 
    void display(List<Course> listCourses, PrintWriter out, int addCourse, int deleteCourse) {
-	  double gpa = 0;
 	  double totalCredits = 0;
 	  double totalPoints = 0;
 	  int failCount = 0;
@@ -140,7 +141,7 @@ public class LogInStudent extends HttpServlet implements Info {
     			 	 "<td>" + course.getGrade() + "</td></tr>");
         		
       }
-      gpa = totalPoints/totalCredits;
+      String gpa = String.format("%.2f", totalPoints/totalCredits);
       out.println("</table>");
      
       out.println("<h2>Summary:</h2><ul>");

@@ -39,7 +39,7 @@ public class AddCourse extends HttpServlet {
 
 		}
 		
-		else if(!grade.contentEquals("A+") && !grade.contentEquals("A") && !grade.contentEquals("A-") && !grade.contentEquals("B+") 
+		if(!grade.contentEquals("A+") && !grade.contentEquals("A") && !grade.contentEquals("A-") && !grade.contentEquals("B+") 
 				&& !grade.contentEquals("B") && !grade.contentEquals("B-") && !grade.contentEquals("C+") && !grade.contentEquals("C")
 				&& !grade.contentEquals("C-") && !grade.contentEquals("D+") && !grade.contentEquals("D") && !grade.contentEquals("D-")
 				&& !grade.contentEquals("F")) {

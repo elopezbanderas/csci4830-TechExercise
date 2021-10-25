@@ -32,14 +32,14 @@ public class CreateAccount extends HttpServlet implements Info {
     	out.println("<div id=\"content\">");
     	out.println("<div id=\"nav\"><h3>Navigation</h3><ul>");
     	out.println("<li><a href=\"/csci4830-TechExercise/main.html\">Home Page</a> <br></li>");
-    	out.println("<li><a href=\"/csci4830-TechExercise/login.html\">Log In</a> <br></li>");
+    	out.println("<li><a href=\"/csci4830-TechExercise/logIn.html\">Log In</a> <br></li>");
     	out.println("<li><a href=\"/csci4830-TechExercise/createAccount.html\">Create New Account</a> <br></li></ul></div>");
 		
 		String nuid = request.getParameter("nuid").trim();
 		String firstName = request.getParameter("firstName").trim();
 		String lastName = request.getParameter("lastName").trim();
 		
-		if(nuid.length() != 8 || firstName.length() == 0 || lastName.length()==0) {
+		if(nuid.length() != 8 || firstName.isEmpty() || lastName.isEmpty()) {
 	    	out.println("<div id=\"main\"><h2>Account Not Created!</h2><p>The account could not be created with the data you provided.</p>");
 	    	out.println("<p>This may be because you did not type a valid 8-digit NUID or did not complete a field.</p><p>Please try creating the account again.</p></div></div>");
 	    	out.println("</div><div id=\"footer\">Copyright</div></div></body></html>");
