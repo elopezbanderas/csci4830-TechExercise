@@ -1,11 +1,1 @@
-/datamodel/
-/hibernate.cfg.xml
-/style.css
 /util/
-/AddCourse.class
-/CreateAccount.class
-/LogInStudent.class
-/MyServlet.class
-/DeleterCourse.class
-/DeleteCourse.class
-/SearchCourse.class
