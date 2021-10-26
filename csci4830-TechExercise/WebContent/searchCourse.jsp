@@ -17,7 +17,7 @@
 				<h3>Navigation</h3>
 				<ul>
 					<li><a href="/csci4830-TechExercise/main.html">Home Page</a> <br></li>
-					<li><a href="/csci4830-TechExercise/logInStudent?nuid=<%=request.getParameter("nuid") %>">Back</a> <br>
+					<li><a href="/csci4830-TechExercise/LogInStudent?nuid=<%=request.getParameter("nuid") %>">Back</a> <br>
 						<br></li>
 				</ul>
 			</div>
